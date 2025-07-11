@@ -53,6 +53,11 @@
                     <input type="password" id="password" placeholder="Password" required class="input-field">
                     <i class="fas fa-eye toggle-password" id="togglePasswordRegister"></i>
                 </div>
+                <div class="input-group password-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required class="input-field">
+                    <i class="fas fa-eye toggle-password" id="toggleConfirmPassword"></i>
+                </div>
                 <button type="submit" class="btn btn-primary w-full mt-6">
                     <i class="fas fa-user-plus mr-2"></i> Register
                 </button>
@@ -84,7 +89,7 @@
         // Handle registration
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const username = document.getElementById('fullName').value;
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const res = await fetch('/register', {
                 method: 'POST',
