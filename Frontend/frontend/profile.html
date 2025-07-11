@@ -29,8 +29,27 @@
     <main class="profile-page-main flex-grow flex justify-center py-16">
         <div class="profile-card card">
             <h2 class="section-title mb-4">User Profile</h2>
-            <div id="profileDetails" class="profile-details">
+            <div id="profileDetails" class="profile-details mb-6">
                 <!-- User details will be loaded here -->
+            </div>
+            <div id="recentPredictions" class="recent-predictions">
+                <h3 class="section-title" style="font-size:1.2rem;color:#219150;margin-bottom:0.5rem;">Last 5 Predictions</h3>
+                <table style="width:100%;border-collapse:collapse;background:#f8fcf8;border-radius:10px;">
+                    <thead>
+                        <tr style="background:#eaf6ea;color:#219150;font-weight:600;">
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">District</th>
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">Year</th>
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">Production</th>
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">Area</th>
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">Rainfall</th>
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">Temperature</th>
+                            <th style="padding:0.5rem;border-bottom:1px solid #d0e6d0;">Humidity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentPredictionsBody">
+                        <!-- Recent predictions will be loaded here -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
@@ -44,18 +63,44 @@
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Fetch user details from localStorage or backend
-        const user = JSON.parse(localStorage.getItem('user_profile'));
-        const profileDetails = document.getElementById('profileDetails');
-        if (user) {
-            profileDetails.innerHTML = `
-                <p><strong>Name:</strong> ${user.name || ''}</p>
-                <p><strong>Email:</strong> ${user.email || ''}</p>
-                <p><strong>Username:</strong> ${user.username || ''}</p>
-            `;
-        } else {
-            profileDetails.innerHTML = '<p>No profile details found.</p>';
-        }
+        // Fetch user details from backend
+        fetch('/profile')
+            .then(response => response.json())
+            .then(data => {
+                const profileDetails = document.getElementById('profileDetails');
+                if (data.success && data.user) {
+                    profileDetails.innerHTML = `
+                        <p><strong>Name:</strong> ${data.user.username}</p>
+                        <p><strong>Email:</strong> ${data.user.email || ''}</p>
+                        <p><strong>Account Created:</strong> ${data.user.created_at || ''}</p>
+                    `;
+                } else {
+                    profileDetails.innerHTML = '<p>No profile details found.</p>';
+                }
+            });
+        // Fetch last 5 predictions from backend
+        fetch('/recent_predictions')
+            .then(response => response.json())
+            .then(data => {
+                const recentPredictionsBody = document.getElementById('recentPredictionsBody');
+                if (data.success && data.predictions && data.predictions.length > 0) {
+                    data.predictions.forEach(pred => {
+                        recentPredictionsBody.innerHTML += `
+                            <tr>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.district || ''}</td>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.year || ''}</td>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.production || ''}</td>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.area || ''}</td>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.rainfall || ''}</td>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.temperature || ''}</td>
+                                <td style='padding:0.5rem;border-bottom:1px solid #d0e6d0;'>${pred.humidity || ''}</td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    recentPredictionsBody.innerHTML = `<tr><td colspan="7" style="padding:1rem;text-align:center;color:#888;">No predictions found.</td></tr>`;
+                }
+            });
         document.getElementById('logoutNav').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.removeItem('access_token');

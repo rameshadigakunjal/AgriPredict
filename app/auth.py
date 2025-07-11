@@ -214,5 +214,24 @@ def check_session():
         print(f"❌ Session check error: {e}")
         return jsonify({'success': False, 'message': 'Session check failed'}), 500
 
+@auth.route('/recent_predictions', methods=['GET'])
+def recent_predictions():
+    """Get last 5 predictions for the logged-in user"""
+    try:
+        user_id = session.get('user_id')
+        if not user_id:
+            return jsonify({'success': False, 'message': 'Not logged in'}), 401
+        # Connect to the correct predictions database
+        db = sqlite3.connect('anaconda_projects/db/project_filebrowser.db')
+        db.row_factory = sqlite3.Row
+        cur = db.cursor()
+        cur.execute('''SELECT district, year, area, production, temperature, rainfall, humidity, predicted_yield, predicted_n, predicted_p, predicted_k, timestamp FROM predictions WHERE user_id = ? ORDER BY timestamp DESC LIMIT 5''', (user_id,))
+        predictions = [dict(row) for row in cur.fetchall()]
+        db.close()
+        return jsonify({'success': True, 'predictions': predictions}), 200
+    except Exception as e:
+        print(f"❌ Recent predictions error: {e}")
+        return jsonify({'success': False, 'message': 'Failed to get recent predictions'}), 500
+
 # Initialize database when module is imported
 init_db()

@@ -23,6 +23,8 @@
         .form-section-header i { color: #219150; font-size: 1.2rem; margin-right: 0.5rem; }
         .form-section-header h3 { font-size: 1.1rem; font-weight: 600; color: #219150; margin: 0; }
         .form-section-header .section-description { margin-left: auto; color: #888; font-size: 0.95rem; }
+        .input-group { background: #f4f8f4; border-radius: 10px; padding: 1rem; margin-bottom: 0.5rem; }
+        .input-label { color: #219150; display: block; margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -64,26 +66,26 @@
                     <h3 class="section-heading">Basic Information</h3>
                     <span class="section-description">Location and production details</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div class="input-group">
-                        <i class="fas fa-map-marker-alt input-icon"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="districtPredict" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-map-marker-alt input-icon"></i> District</label>
                         <select id="districtPredict" class="input-field" required>
                             <option value="">Select District</option>
                         </select>
                     </div>
-                    <div class="input-group">
-                        <i class="fas fa-calendar-alt input-icon"></i>
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="year" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-calendar-alt input-icon"></i> Year</label>
                         <select id="year" class="input-field" required>
                             <option value="">Select Year</option>
                         </select>
                     </div>
-                    <div class="input-group">
-                        <i class="fas fa-weight-hanging input-icon"></i>
-                        <input type="number" id="production" placeholder="Production (1000 tons) e.g., 5000" required class="input-field" min="0" step="any">
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="production" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-weight-hanging input-icon"></i> Production (1000 tons)</label>
+                        <input type="number" id="production" placeholder="e.g., 5000" required class="input-field" min="0" step="any">
                     </div>
-                    <div class="input-group">
-                        <i class="fas fa-ruler-combined input-icon"></i>
-                        <input type="number" id="area" placeholder="Area (1000 ha) e.g., 100" required class="input-field" min="0" step="any">
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="area" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-ruler-combined input-icon"></i> Area (1000 ha)</label>
+                        <input type="number" id="area" placeholder="e.g., 100" required class="input-field" min="0" step="any">
                     </div>
                 </div>
                 <div class="form-section-header">
@@ -91,17 +93,17 @@
                     <h3 class="section-heading">Climate Data</h3>
                     <span class="section-description">Environmental conditions for your area</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div class="input-group">
-                        <i class="fas fa-cloud-showers-heavy input-icon"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="rainfall" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-cloud-showers-heavy input-icon"></i> Rainfall (mm)</label>
                         <input type="number" id="rainfall" placeholder="e.g., 300" required class="input-field" min="0" step="any">
                     </div>
-                    <div class="input-group">
-                        <i class="fas fa-thermometer-half input-icon"></i>
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="temperature" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-thermometer-half input-icon"></i> Temperature (°C)</label>
                         <input type="number" id="temperature" placeholder="e.g., 28" required class="input-field" step="any">
                     </div>
-                    <div class="input-group">
-                        <i class="fas fa-humidity input-icon"></i>
+                    <div class="input-group" style="background:#f4f8f4;border-radius:10px;padding:1rem 1rem 0.5rem 1rem;margin-bottom:0.5rem;">
+                        <label for="humidity" class="input-label font-medium mb-1" style="color:#219150;display:block;"><i class="fas fa-humidity input-icon"></i> Humidity (%)</label>
                         <input type="number" id="humidity" placeholder="e.g., 70" required class="input-field" min="0" max="100" step="any">
                     </div>
                 </div>
