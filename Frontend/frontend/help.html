@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriPredict - Help & Instructions</title>
+    <!-- Link to Google Fonts for 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header Section (reused from index.html) -->
+    <header class="header">
+        <div class="container flex justify-between items-center">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8">
+                <span class="logo-text">AgriPredict</span>
+                <span class="tagline">Rice Yield & Soil Nutrient Predictor</span>
+            </div>
+            <nav class="nav-menu">
+                <ul class="flex">
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="predict.html" class="nav-link"><i class="fas fa-chart-line"></i> Predict</a></li>
+                    <li><a href="help.html" class="nav-link active"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="login.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="register.html" class="nav-link"><i class="fas fa-user-plus"></i> Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content - Help & Instructions Section -->
+    <main class="help-page-main flex-grow flex justify-center py-16">
+        <div class="help-card card">
+            <div class="text-center mb-8">
+                <h2 class="section-title">Help & Instructions</h2>
+                <p class="section-subtitle">Learn how to use the Rice Yield Prediction system effectively</p>
+            </div>
+
+            <!-- Input Field Explanations Section -->
+            <div class="help-section">
+                <div class="form-section-header mb-4">
+                    <i class="fas fa-keyboard section-icon"></i>
+                    <h3 class="section-heading">Input Field Explanations</h3>
+                </div>
+                <div class="help-content-block">
+                    <h4 class="help-subheading">Basic Information</h4>
+                    <div class="help-item">
+                        <i class="fas fa-map-marker-alt help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">District</h5>
+                            <p>Select your farming district from the dropdown. This helps the model account for regional soil, climate patterns, and agricultural practices specific to your area.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-calendar-alt help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">Year</h5>
+                            <p>Choose the crop year for your prediction. This accounts for year-on-year improvements in farming techniques, seed varieties, and changing climate patterns.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-weight-hanging help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">Production (tons)</h5>
+                            <p><strong>Total rice yield:</strong> Enter the amount of rice you expect to harvest from your entire farming area, measured in metric tons. For example, if you have 10 hectares and expect 5 tons per hectare, enter 50 tons.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="help-subheading mt-8">Climate Data</h4>
+                    <div class="help-item">
+                        <i class="fas fa-cloud-showers-heavy help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">Rainfall (mm)</h5>
+                            <p><strong>Total rainfall (mm):</strong> Expected rainfall during the growing season (typically 4-6 months). You can get this data from local weather stations, meteorological departments, or weather apps. Normal range is 100-2000mm.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-thermometer-half help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">Temperature (°C)</h5>
+                            <p><strong>Average temperature (°C):</strong> Average temperature during the growing season. This should be the mean of daily temperatures. Optimal temperature for rice: 20-35°C. Use local weather data or climatological forecasts.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-water help-icon"></i> <!-- Changed from fa-humidity as it might not exist -->
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">Humidity (%)</h5>
+                            <p><strong>Average humidity (%):</strong> Average humidity during the growing season. This affects plant transpiration and disease susceptibility. Normal range: 50-90%. Ask your local weather station or a climate agency.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Understanding Your Results Section -->
+            <div class="help-section mt-8">
+                <div class="form-section-header mb-4">
+                    <i class="fas fa-chart-bar section-icon"></i>
+                    <h3 class="section-heading">Understanding Your Results</h3>
+                </div>
+                <div class="help-content-block">
+                    <div class="help-item">
+                        <i class="fas fa-seedling help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">Rice Yield (tons/hectare)</h5>
+                            <p><strong>Predicted Yield:</strong> The amount of rice you can expect to harvest per hectare of land. It's calculated by dividing your predicted total production by your farm area. It will be a range from 2-8 tons/hectare depending on conditions.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-flask help-icon"></i>
+                        <div class="help-text-content">
+                            <h5 class="help-item-title">NPK Requirements (kg/hectare)</h5>
+                            <p><strong>Nitrogen (N):</strong> Essential for vegetative growth and leaf development.</p>
+                            <p><strong>Phosphorus (P):</strong> Important for root development and grain formation.</p>
+                            <p><strong>Potassium (K):</strong> Enhances disease resistance and grain quality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Units Reference Section -->
+            <div class="help-section mt-8">
+                <div class="form-section-header mb-4">
+                    <i class="fas fa-ruler-combined section-icon"></i>
+                    <h3 class="section-heading">Units Reference</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 help-content-block">
+                    <div>
+                        <h4 class="help-subheading">Input Units</h4>
+                        <ul class="unit-list">
+                            <li>Production: Metric tons (1000 kg)</li>
+                            <li>Rainfall: Millimeters (mm)</li>
+                            <li>Temperature: Degrees Celsius (°C)</li>
+                            <li>Humidity: Percentage (%)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="help-subheading">Output Units</h4>
+                        <ul class="unit-list">
+                            <li>Yield: Tons per hectare (tons/ha)</li>
+                            <li>Nutrients: Kilograms per hectare (kg/ha)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips for Better Predictions Section -->
+            <div class="help-section mt-8">
+                <div class="form-section-header mb-4">
+                    <i class="fas fa-lightbulb section-icon"></i>
+                    <h3 class="section-heading">Tips for Better Predictions</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 help-content-block">
+                    <div>
+                        <h4 class="help-subheading">Data Accuracy</h4>
+                        <ul class="tip-list">
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Use recent weather data from reliable sources.</li>
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Provide accurate production data for your farm.</li>
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Account for irrigation when interpreting rainfall.</li>
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Use average values for variable conditions.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="help-subheading">Best Practices</h4>
+                        <ul class="tip-list">
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Run predictions for different scenarios.</li>
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Compare with historical actual yields.</li>
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Consider local farming practices.</li>
+                            <li><i class="fas fa-check-circle text-primary-green mr-2"></i> Consult with agricultural experts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section (reused from index.html) -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="footer-text">Powered by Advanced Machine Learning</p>
+            <p class="footer-text">AgriPredict &copy; 2024 - Transforming Agriculture through Data Science</p>
+        </div>
+    </footer>
+
+    <!-- Link to main.js for general functionalities -->
+    <script src="js/main.js"></script>
+</body>
+</html>

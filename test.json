@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "AgriPredict Backend",
+    "description": "Test Rice Yield Prediction API (with district and year)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Predict Rice Yield (kolhapur, 1986)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"district\": \"kolhapur\",\n  \"year\": 1986,\n  \"area\": 100,\n  \"production\": 175,\n  \"temperature\": 20.88,\n  \"humidity\": 82.00,\n  \"rainfall\": 202.94\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/predict",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "predict"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

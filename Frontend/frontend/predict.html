@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriPredict - Predict Yield & Nutrients</title>
+    <!-- Link to Google Fonts for 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header Section (reused from index.html) -->
+    <header class="header">
+        <div class="container flex justify-between items-center">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8">
+                <span class="logo-text">AgriPredict</span>
+                <span class="tagline">Rice Yield & Soil Nutrient Predictor</span>
+            </div>
+            <nav class="nav-menu">
+                <ul class="flex">
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="predict.html" class="nav-link active" id="predictNav"><i class="fas fa-chart-line"></i> Predict</a></li>
+                    <li><a href="help.html" class="nav-link"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="#" class="nav-link hidden" id="logoutNav"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profile.html" class="nav-link hidden" id="profileNav"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content - Prediction Form Section -->
+    <main class="predict-page-main flex-grow flex justify-center py-16">
+        <div class="predict-card card">
+            <div class="text-center mb-8">
+                <h2 class="section-title">Rice Yield Prediction</h2>
+                <p class="section-subtitle">Enter your farming data below to get accurate predictions for rice yield and required soil nutrients.</p>
+            </div>
+
+            <!-- Recent Inputs Dropdown -->
+            <div class="recent-inputs mb-6">
+                <label for="recentInputs" class="block text-sm font-medium text-gray-700 mb-2">
+                    <i class="fas fa-history mr-1"></i>Recent Inputs
+                </label>
+                <select id="recentInputs" class="input-field w-full">
+                    <option value="">Select a recent input...</option>
+                </select>
+            </div>
+
+            <!-- Main Prediction Form -->
+            <form id="predictionForm" class="prediction-form">
+                <!-- Basic Information Section -->
+                <div class="form-section-header">
+                    <i class="fas fa-info-circle section-icon"></i>
+                    <h3 class="section-heading">Basic Information</h3>
+                    <p class="section-description">Location and production details</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt input-icon"></i>
+                        <select id="districtPredict" class="input-field" required>
+                            <option value="">Select District</option>
+                            <!-- Districts will be dynamically loaded here via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt input-icon"></i>
+                        <select id="year" class="input-field" required>
+                            <option value="">Select Year</option>
+                            <!-- Years will be dynamically loaded here via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-weight-hanging input-icon"></i>
+                        <input type="number" id="production" placeholder="Production (1000 tons) e.g., 5000" required class="input-field" min="0" step="any">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-ruler-combined input-icon"></i>
+                        <input type="number" id="area" placeholder="Area (1000 ha) e.g., 100" required class="input-field" min="0" step="any">
+                    </div>
+                </div>
+
+                <!-- Climate Data Section -->
+                <div class="form-section-header">
+                    <i class="fas fa-cloud-sun-rain section-icon"></i>
+                    <h3 class="section-heading">Climate Data</h3>
+                    <p class="section-description">Environmental conditions for your area</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="input-group">
+                        <i class="fas fa-cloud-showers-heavy input-icon"></i>
+                        <input type="number" id="rainfall" placeholder="e.g., 300" required class="input-field" min="0" step="any">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-thermometer-half input-icon"></i>
+                        <input type="number" id="temperature" placeholder="e.g., 28" required class="input-field" step="any">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-humidity input-icon"></i>
+                        <input type="number" id="humidity" placeholder="e.g., 70" required class="input-field" min="0" max="100" step="any">
+                    </div>
+                </div>
+
+                <button type="submit" id="predictBtn" class="btn btn-primary w-full">Get Prediction</button>
+            </form>
+
+            <!-- Prediction Results Section (Initially Hidden) -->
+            <div id="predictionResults" class="prediction-results mt-8 hidden">
+                <h3 class="results-title text-primary-green mb-4">Prediction Results</h3>
+                <div class="result-item">
+                    <span class="result-label"><i class="fas fa-seedling mr-2"></i> Predicted Rice Yield:</span>
+                    <span id="yieldOutput" class="result-value">--</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label"><i class="fas fa-flask mr-2"></i> Predicted NPK Requirements (kg/hectare):</span>
+                    <span id="npkOutput" class="result-value">N: -- P: -- K: --</span>
+                </div>
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator" class="loading-indicator text-center mt-4 hidden">
+                    <i class="fas fa-spinner fa-spin text-primary-green text-2xl"></i>
+                    <p class="text-text-light mt-2">Calculating predictions...</p>
+                </div>
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message text-center mt-4 hidden">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-2xl"></i>
+                    <p class="text-red-500 mt-2">An error occurred. Please try again or check your inputs.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section (reused from index.html) -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="footer-text">Powered by Advanced Machine Learning</p>
+            <p class="footer-text">AgriPredict &copy; 2024 - Transforming Agriculture through Data Science</p>
+        </div>
+    </footer>
+
+    <!-- Link to main.js for general functionalities -->
+    <script src="js/main.js"></script>
+    <!-- Link to prediction.js for prediction specific functionalities -->
+    <script src="js/prediction.js"></script>
+    <script>
+        // Redirect to login if not logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('access_token');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+                return;
+            }
+            const logoutNav = document.getElementById('logoutNav');
+            const profileNav = document.getElementById('profileNav');
+            const predictNav = document.getElementById('predictNav');
+            logoutNav.classList.remove('hidden');
+            profileNav.classList.remove('hidden');
+            predictNav.classList.remove('hidden');
+            logoutNav.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('user_profile');
+                window.location.href = 'login.html';
+            });
+        });
+
+        // Fetch districts and years from backend and populate dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/options')
+                .then(response => response.json())
+                .then(data => {
+                    // Populate districts
+                    const districtSelect = document.getElementById('districtPredict');
+                    districtSelect.innerHTML = '<option value="">Select District</option>';
+                    data.districts.forEach(d => {
+                        const opt = document.createElement('option');
+                        opt.value = d;
+                        opt.textContent = d;
+                        districtSelect.appendChild(opt);
+                    });
+                    // Populate years
+                    const yearSelect = document.getElementById('year');
+                    yearSelect.innerHTML = '<option value="">Select Year</option>';
+                    data.years.forEach(y => {
+                        const opt = document.createElement('option');
+                        opt.value = y;
+                        opt.textContent = y;
+                        yearSelect.appendChild(opt);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error fetching options:', err);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+flask
+pandas
+numpy
+scikit-learn
+joblib
+streamlit
+
+# venv\Scripts\activate
+# 
