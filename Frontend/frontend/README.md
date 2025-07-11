@@ -1,0 +1,13 @@
+This folder contains the frontend files for AgriPredict. Keep only the following main files:
+- index.html
+- login_new.html
+- register_new.html
+- predict.html
+- profile.html
+- help.html
+- css/style.css
+- js/auth.js
+- js/main.js
+- js/prediction.js
+- assets/images/logo.png
+- 404.html

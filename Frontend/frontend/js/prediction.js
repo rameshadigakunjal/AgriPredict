@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         recents = recents.filter(r => JSON.stringify(r) !== JSON.stringify(inputObj));
         // Add new input to front
         recents.unshift(inputObj);
-        // Keep only last 3
-        recents = recents.slice(0, 3);
+        // Keep only last 10 (increase from 3 for more usability)
+        recents = recents.slice(0, 10);
         localStorage.setItem(recentInputsKey, JSON.stringify(recents));
     }
 
@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         predictionForm.addEventListener('submit', async (event) => {
             event.preventDefault(); // Prevent default form submission
             console.log("Submit event fired");
-            alert("Prediction form submit event fired!");
 
             resetResultsDisplay(); // Clear previous results and hide messages
             showElement(loadingIndicator); // Show loading indicator
@@ -128,37 +127,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers['Authorization'] = `Bearer ${accessToken}`;
                 }
 
-                // Replace with your actual Flask backend prediction endpoint
+                // Flask backend prediction endpoint
                 const response = await fetch('/predict', {
                     method: 'POST',
                     headers: headers,
                     body: JSON.stringify(payload),
                 });
 
+                if (!response.ok) {
+                    throw new Error('Prediction request failed: ' + response.status);
+                }
+
                 const data = await response.json();
 
-                hideElement(loadingIndicator); // Hide loading indicator
-
-                if (response.ok) {
-                    // Prediction successful
-                    console.log('Prediction successful:', data);
-                    showElement(predictionResults); // Show the results section
-                    predictionResults.scrollIntoView({ behavior: 'smooth' });
-                    // Update the DOM with predicted values
-                    yieldOutput.textContent = `${data.predicted_yield.toFixed(2)} Kg/ha`;
-                    npkOutput.textContent = `N: ${data.predicted_n.toFixed(2)} P: ${data.predicted_p.toFixed(2)} K: ${data.predicted_k.toFixed(2)}`;
-                } else {
-                    // Prediction failed
-                    console.error('Prediction failed:', data.message || 'Unknown error');
-                    showElement(errorMessage); // Show error message
-                    errorMessage.querySelector('p').textContent = data.message || 'Prediction failed. Please check your inputs and try again.';
-                }
+                // Redirect to results page with prediction data
+                const params = new URLSearchParams({
+                    yield: data.predicted_yield,
+                    n: data.predicted_n,
+                    p: data.predicted_p,
+                    k: data.predicted_k
+                });
+                window.location.href = `prediction_result.html?${params.toString()}`;
             } catch (error) {
-                console.error('Network error or unexpected issue during prediction:', error);
+                console.error('Prediction error:', error);
                 hideElement(loadingIndicator);
                 showElement(errorMessage); // Show error message
                 errorMessage.querySelector('p').textContent = 'An error occurred while fetching prediction. Please try again later.';
             }
         });
+    } else {
+        console.error('Prediction form handler NOT attached!');
     }
 });

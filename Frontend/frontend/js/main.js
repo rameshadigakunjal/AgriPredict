@@ -27,16 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Handle clicks on "Predict Now" and "Get Started" buttons on the Home page
-    const predictButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
-    predictButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            // Prevent default link behavior if it's a button
-            event.preventDefault();
-            // Redirect to the predict.html page
-            window.location.href = 'predict.html';
+    // Only attach Predict Now/Get Started button handler on index.html
+    if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')) {
+        const predictButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+        predictButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                // Prevent default link behavior if it's a button
+                event.preventDefault();
+                // Redirect to the predict.html page
+                window.location.href = 'predict.html';
+            });
         });
-    });
+    }
 
     // You can add more general JavaScript functionalities here that apply across multiple pages,
     // or specific ones for the index.html page.

@@ -1,0 +1,1 @@
+Delete any old login.html, register.html, test_auth.html, and simple_test.html files from the workspace if they exist.

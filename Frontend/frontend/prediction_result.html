@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results - AgriPredict</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background: #f8fcf8; font-family: 'Inter', Arial, sans-serif; }
+        .result-card { background: #fff; border-radius: 18px; box-shadow: 0 2px 16px rgba(33,145,80,0.10); padding: 2.5rem 2rem; max-width: 500px; margin: 2rem auto; }
+        .results-title { color: #219150; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .result-item { margin-bottom: 1.2rem; font-size: 1.2rem; }
+        .btn-primary { background: #219150; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-primary:hover { background: #1e7c3a; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container flex justify-between items-center" style="max-width:1200px;margin:auto;">
+            <div class="logo" style="display:flex;align-items:center;">
+                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8" style="height:40px;">
+                <span class="logo-text">AgriPredict</span>
+                <span class="tagline">Rice Yield & Soil Nutrient Predictor</span>
+            </div>
+            <nav class="nav-menu">
+                <ul class="flex">
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="predict.html" class="nav-link"><i class="fas fa-chart-line"></i> Predict</a></li>
+                    <li><a href="help.html" class="nav-link"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="#" class="nav-link hidden" id="logoutNav"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profile.html" class="nav-link hidden" id="profileNav"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow flex justify-center py-16">
+        <div class="result-card card text-center">
+            <h2 class="results-title">Prediction Results</h2>
+            <div class="result-item">
+                <span class="result-label"><i class="fas fa-seedling mr-2"></i> Predicted Rice Yield:</span>
+                <span id="yieldOutput" class="result-value">--</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label"><i class="fas fa-flask mr-2"></i> Predicted NPK Requirements (kg/hectare):</span>
+                <span id="npkOutput" class="result-value">N: -- P: -- K: --</span>
+            </div>
+            <a href="predict.html" class="btn btn-primary mt-4">Try Another Prediction</a>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="footer-text">Powered by Advanced Machine Learning</p>
+            <p class="footer-text">AgriPredict &copy; 2024 - Transforming Agriculture through Data Science</p>
+        </div>
+    </footer>
+    <script>
+    // Read query params and show results
+    function getParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const yieldVal = getParam('yield');
+        const nVal = getParam('n');
+        const pVal = getParam('p');
+        const kVal = getParam('k');
+        document.getElementById('yieldOutput').textContent = yieldVal ? `${parseFloat(yieldVal).toFixed(2)} Kg/ha` : '--';
+        document.getElementById('npkOutput').textContent = (nVal && pVal && kVal)
+            ? `N: ${parseFloat(nVal).toFixed(2)} P: ${parseFloat(pVal).toFixed(2)} K: ${parseFloat(kVal).toFixed(2)}`
+            : 'N: -- P: -- K: --';
+    });
+    </script>
+</body>
+</html>

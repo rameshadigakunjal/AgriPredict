@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriPredict - Predict Yield & Nutrients</title>
-    <!-- Link to Google Fonts for 'Inter' -->
+    <title>AgriPredict - Rice Yield Prediction</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Link to Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Link to custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background: #f8fcf8; font-family: 'Inter', Arial, sans-serif; }
+        .predict-card { background: #fff; border-radius: 18px; box-shadow: 0 2px 16px rgba(33,145,80,0.10); padding: 2.5rem 2rem; max-width: 600px; margin: 2rem auto; }
+        .section-title { color: #219150; font-size: 2.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-subtitle { color: #444; font-size: 1.1rem; margin-bottom: 2rem; }
+        .input-field, select { width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #d0e6d0; margin-bottom: 1rem; font-size: 1rem; }
+        .btn-primary { background: #219150; color: #fff; border: none; padding: 0.9rem 0; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 1rem; }
+        .btn-primary:hover { background: #1e7c3a; }
+        .results-title { color: #219150; font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; }
+        .result-item { margin-bottom: 0.7rem; font-size: 1.1rem; }
+        .hidden { display: none !important; }
+        .recent-inputs { margin-bottom: 1.5rem; }
+        .form-section-header { display: flex; align-items: center; margin-bottom: 0.5rem; }
+        .form-section-header i { color: #219150; font-size: 1.2rem; margin-right: 0.5rem; }
+        .form-section-header h3 { font-size: 1.1rem; font-weight: 600; color: #219150; margin: 0; }
+        .form-section-header .section-description { margin-left: auto; color: #888; font-size: 0.95rem; }
+    </style>
 </head>
 <body>
-    <!-- Header Section (reused from index.html) -->
     <header class="header">
-        <div class="container flex justify-between items-center">
-            <div class="logo">
-                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8">
+        <div class="container flex justify-between items-center" style="max-width:1200px;margin:auto;">
+            <div class="logo" style="display:flex;align-items:center;">
+                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8" style="height:40px;">
                 <span class="logo-text">AgriPredict</span>
                 <span class="tagline">Rice Yield & Soil Nutrient Predictor</span>
             </div>
             <nav class="nav-menu">
                 <ul class="flex">
                     <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="predict.html" class="nav-link active" id="predictNav"><i class="fas fa-chart-line"></i> Predict</a></li>
+                    <li><a href="predict.html" class="nav-link active"><i class="fas fa-chart-line"></i> Predict</a></li>
                     <li><a href="help.html" class="nav-link"><i class="fas fa-question-circle"></i> Help</a></li>
                     <li><a href="#" class="nav-link hidden" id="logoutNav"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     <li><a href="profile.html" class="nav-link hidden" id="profileNav"><i class="fas fa-user"></i> Profile</a></li>
@@ -31,16 +44,12 @@
             </nav>
         </div>
     </header>
-
-    <!-- Main Content - Prediction Form Section -->
     <main class="predict-page-main flex-grow flex justify-center py-16">
         <div class="predict-card card">
             <div class="text-center mb-8">
                 <h2 class="section-title">Rice Yield Prediction</h2>
                 <p class="section-subtitle">Enter your farming data below to get accurate predictions for rice yield and required soil nutrients.</p>
             </div>
-
-            <!-- Recent Inputs Dropdown -->
             <div class="recent-inputs mb-6">
                 <label for="recentInputs" class="block text-sm font-medium text-gray-700 mb-2">
                     <i class="fas fa-history mr-1"></i>Recent Inputs
@@ -49,28 +58,23 @@
                     <option value="">Select a recent input...</option>
                 </select>
             </div>
-
-            <!-- Main Prediction Form -->
             <form id="predictionForm" class="prediction-form">
-                <!-- Basic Information Section -->
                 <div class="form-section-header">
                     <i class="fas fa-info-circle section-icon"></i>
                     <h3 class="section-heading">Basic Information</h3>
-                    <p class="section-description">Location and production details</p>
+                    <span class="section-description">Location and production details</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                     <div class="input-group">
                         <i class="fas fa-map-marker-alt input-icon"></i>
                         <select id="districtPredict" class="input-field" required>
                             <option value="">Select District</option>
-                            <!-- Districts will be dynamically loaded here via JavaScript -->
                         </select>
                     </div>
                     <div class="input-group">
                         <i class="fas fa-calendar-alt input-icon"></i>
                         <select id="year" class="input-field" required>
                             <option value="">Select Year</option>
-                            <!-- Years will be dynamically loaded here via JavaScript -->
                         </select>
                     </div>
                     <div class="input-group">
@@ -82,12 +86,10 @@
                         <input type="number" id="area" placeholder="Area (1000 ha) e.g., 100" required class="input-field" min="0" step="any">
                     </div>
                 </div>
-
-                <!-- Climate Data Section -->
                 <div class="form-section-header">
                     <i class="fas fa-cloud-sun-rain section-icon"></i>
                     <h3 class="section-heading">Climate Data</h3>
-                    <p class="section-description">Environmental conditions for your area</p>
+                    <span class="section-description">Environmental conditions for your area</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                     <div class="input-group">
@@ -103,11 +105,8 @@
                         <input type="number" id="humidity" placeholder="e.g., 70" required class="input-field" min="0" max="100" step="any">
                     </div>
                 </div>
-
                 <button type="submit" id="predictBtn" class="btn btn-primary w-full">Get Prediction</button>
             </form>
-
-            <!-- Prediction Results Section (Initially Hidden) -->
             <div id="predictionResults" class="prediction-results mt-8 hidden">
                 <h3 class="results-title text-primary-green mb-4">Prediction Results</h3>
                 <div class="result-item">
@@ -118,12 +117,10 @@
                     <span class="result-label"><i class="fas fa-flask mr-2"></i> Predicted NPK Requirements (kg/hectare):</span>
                     <span id="npkOutput" class="result-value">N: -- P: -- K: --</span>
                 </div>
-                <!-- Loading Indicator -->
                 <div id="loadingIndicator" class="loading-indicator text-center mt-4 hidden">
                     <i class="fas fa-spinner fa-spin text-primary-green text-2xl"></i>
                     <p class="text-text-light mt-2">Calculating predictions...</p>
                 </div>
-                <!-- Error Message -->
                 <div id="errorMessage" class="error-message text-center mt-4 hidden">
                     <i class="fas fa-exclamation-triangle text-red-500 text-2xl"></i>
                     <p class="text-red-500 mt-2">An error occurred. Please try again or check your inputs.</p>
@@ -131,69 +128,149 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer Section (reused from index.html) -->
     <footer class="footer">
         <div class="container text-center">
             <p class="footer-text">Powered by Advanced Machine Learning</p>
             <p class="footer-text">AgriPredict &copy; 2024 - Transforming Agriculture through Data Science</p>
         </div>
     </footer>
-
-    <!-- Link to main.js for general functionalities -->
     <script src="js/main.js"></script>
-    <!-- Link to prediction.js for prediction specific functionalities -->
+    <script src="js/auth.js"></script>
     <script src="js/prediction.js"></script>
     <script>
-        // Redirect to login if not logged in
-        document.addEventListener('DOMContentLoaded', function() {
-            const isLoggedIn = localStorage.getItem('access_token');
-            if (!isLoggedIn) {
-                window.location.href = 'login.html';
-                return;
-            }
-            const logoutNav = document.getElementById('logoutNav');
-            const profileNav = document.getElementById('profileNav');
-            const predictNav = document.getElementById('predictNav');
-            logoutNav.classList.remove('hidden');
-            profileNav.classList.remove('hidden');
-            predictNav.classList.remove('hidden');
-            logoutNav.addEventListener('click', function(e) {
-                e.preventDefault();
-                localStorage.removeItem('access_token');
-                localStorage.removeItem('user_profile');
-                window.location.href = 'login.html';
-            });
-        });
-
-        // Fetch districts and years from backend and populate dropdowns
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/api/options')
-                .then(response => response.json())
-                .then(data => {
-                    // Populate districts
-                    const districtSelect = document.getElementById('districtPredict');
-                    districtSelect.innerHTML = '<option value="">Select District</option>';
-                    data.districts.forEach(d => {
-                        const opt = document.createElement('option');
-                        opt.value = d;
-                        opt.textContent = d;
-                        districtSelect.appendChild(opt);
-                    });
-                    // Populate years
-                    const yearSelect = document.getElementById('year');
-                    yearSelect.innerHTML = '<option value="">Select Year</option>';
-                    data.years.forEach(y => {
-                        const opt = document.createElement('option');
-                        opt.value = y;
-                        opt.textContent = y;
-                        yearSelect.appendChild(opt);
-                    });
-                })
-                .catch(err => {
-                    console.error('Error fetching options:', err);
+    // --- Fetch districts and years from backend and populate dropdowns ---
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/options')
+            .then(response => response.json())
+            .then(data => {
+                // Populate districts
+                const districtSelect = document.getElementById('districtPredict');
+                districtSelect.innerHTML = '<option value="">Select District</option>';
+                data.districts.forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d;
+                    opt.textContent = d;
+                    districtSelect.appendChild(opt);
                 });
+                // Populate years
+                const yearSelect = document.getElementById('year');
+                yearSelect.innerHTML = '<option value="">Select Year</option>';
+                data.years.forEach(y => {
+                    const opt = document.createElement('option');
+                    opt.value = y;
+                    opt.textContent = y;
+                    yearSelect.appendChild(opt);
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching options:', err);
+            });
+    });
+    </script>
+    <script>
+    // --- Recent Inputs Logic ---
+    const recentInputsKey = 'recentPredictionInputs';
+    const recentInputsDropdown = document.getElementById('recentInputs');
+    function saveRecentInput(inputObj) {
+        let recents = JSON.parse(localStorage.getItem(recentInputsKey)) || [];
+        recents = recents.filter(r => JSON.stringify(r) !== JSON.stringify(inputObj));
+        recents.unshift(inputObj);
+        recents = recents.slice(0, 10);
+        localStorage.setItem(recentInputsKey, JSON.stringify(recents));
+    }
+    function populateRecentInputsDropdown() {
+        const recents = JSON.parse(localStorage.getItem(recentInputsKey)) || [];
+        recentInputsDropdown.innerHTML = '<option value="">Select a recent input...</option>';
+        recents.forEach((input, idx) => {
+            const label = `${input.district}, ${input.year}, Prod: ${input.production}, Area: ${input.area}, Rain: ${input.rainfall}, Temp: ${input.temperature}, Hum: ${input.humidity}`;
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = label;
+            recentInputsDropdown.appendChild(opt);
         });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        populateRecentInputsDropdown();
+        recentInputsDropdown.addEventListener('change', function() {
+            const recents = JSON.parse(localStorage.getItem(recentInputsKey)) || [];
+            const idx = parseInt(this.value);
+            if (!isNaN(idx) && recents[idx]) {
+                document.getElementById('districtPredict').value = recents[idx].district;
+                document.getElementById('year').value = recents[idx].year;
+                document.getElementById('production').value = recents[idx].production;
+                document.getElementById('area').value = recents[idx].area;
+                document.getElementById('rainfall').value = recents[idx].rainfall;
+                document.getElementById('temperature').value = recents[idx].temperature;
+                document.getElementById('humidity').value = recents[idx].humidity;
+            }
+        });
+    });
+    </script>
+    <script>
+    // --- Prediction Form Submission ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const predictionForm = document.getElementById('predictionForm');
+        const predictionResults = document.getElementById('predictionResults');
+        const yieldOutput = document.getElementById('yieldOutput');
+        const npkOutput = document.getElementById('npkOutput');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const errorMessage = document.getElementById('errorMessage');
+        function showElement(element) { element.classList.remove('hidden'); }
+        function hideElement(element) { element.classList.add('hidden'); }
+        function resetResultsDisplay() {
+            hideElement(predictionResults);
+            hideElement(loadingIndicator);
+            hideElement(errorMessage);
+            yieldOutput.textContent = '--';
+            npkOutput.textContent = 'N: -- P: -- K: --';
+        }
+        resetResultsDisplay();
+        if (predictionForm) {
+            predictionForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                resetResultsDisplay();
+                showElement(loadingIndicator);
+                const district = document.getElementById('districtPredict').value;
+                const year = document.getElementById('year').value;
+                const area = parseFloat(document.getElementById('area').value);
+                const production = parseFloat(document.getElementById('production').value);
+                const temperature = parseFloat(document.getElementById('temperature').value);
+                const humidity = parseFloat(document.getElementById('humidity').value);
+                const rainfall = parseFloat(document.getElementById('rainfall').value);
+                saveRecentInput({ district, year, production, area, rainfall, temperature, humidity });
+                populateRecentInputsDropdown();
+                if (!district || !year || isNaN(production) || isNaN(rainfall) || isNaN(temperature) || isNaN(humidity)) {
+                    hideElement(loadingIndicator);
+                    showElement(errorMessage);
+                    errorMessage.querySelector('p').textContent = 'Please fill in all required fields with valid numbers.';
+                    return;
+                }
+                const payload = { district, year: parseInt(year), area, production, temperature, humidity, rainfall };
+                try {
+                    const response = await fetch('/predict', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
+                    if (!response.ok) throw new Error('Prediction request failed: ' + response.status);
+                    const data = await response.json();
+                    // Instead of redirect, open results in a new tab
+                    const params = new URLSearchParams({
+                        yield: data.predicted_yield,
+                        n: data.predicted_n,
+                        p: data.predicted_p,
+                        k: data.predicted_k
+                    });
+                    window.open(`prediction_result.html?${params.toString()}`, '_blank');
+                } catch (error) {
+                    console.error('Prediction error:', error);
+                    hideElement(loadingIndicator);
+                    showElement(errorMessage);
+                    errorMessage.querySelector('p').textContent = 'An error occurred while fetching prediction. Please try again later.';
+                }
+            });
+        }
+    });
     </script>
 </body>
 </html>

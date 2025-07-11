@@ -17,7 +17,11 @@
                 <ul class="flex">
                     <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="predict.html" class="nav-link"><i class="fas fa-chart-line"></i> Predict</a></li>
-                    <li><a href="#" class="nav-link" id="logoutNav"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="help.html" class="nav-link"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="login_new.html" class="nav-link" id="loginNav"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="register_new.html" class="nav-link" id="registerNav"><i class="fas fa-user-plus"></i> Register</a></li>
+                    <li><a href="#" class="nav-link hidden" id="logoutNav"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profile.html" class="nav-link hidden" id="profileNav"><i class="fas fa-user"></i> Profile</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,6 +34,14 @@
             </div>
         </div>
     </main>
+    <script src="js/auth.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof checkLoginStatus === 'function') {
+          checkLoginStatus();
+        }
+      });
+    </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Fetch user details from localStorage or backend

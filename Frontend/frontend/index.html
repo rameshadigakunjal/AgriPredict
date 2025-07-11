@@ -4,130 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriPredict - Rice Yield & Soil Nutrient Predictor</title>
-    <!-- Link to Google Fonts for 'Inter' -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Link to Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Link to custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', Arial, sans-serif; background: #f8fcf8; margin: 0; }
+        .header { background: linear-gradient(90deg, #219150 60%, #1e7c3a 100%); color: #fff; padding: 0.5rem 0; }
+        .logo-text { font-weight: 700; font-size: 1.3rem; margin-left: 0.5rem; }
+        .tagline { font-size: 0.9rem; color: #e0ffe0; margin-left: 0.5rem; }
+        .nav-menu ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1rem; }
+        .nav-link { color: #fff; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; transition: background 0.2s; }
+        .nav-link.active, .nav-link:hover { background: #1e7c3a; color: #fff; }
+        .main-content { padding: 2rem 0 0 0; }
+        .section-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-subtitle { font-size: 1.1rem; color: #444; margin-bottom: 2rem; }
+        .btn-primary { background: #219150; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-primary:hover { background: #1e7c3a; }
+        .feature-cards { display: flex; gap: 2rem; justify-content: center; margin: 2rem 0; }
+        .feature-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 16px rgba(33,145,80,0.08); padding: 2rem 1.5rem; flex: 1; min-width: 220px; max-width: 340px; }
+        .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .feature-card ul { margin: 0.5rem 0 0 1rem; color: #555; font-size: 0.98rem; }
+        .why-section { background: #f3fdf3; padding: 2rem 0; margin: 2rem 0; }
+        .why-cards { display: flex; gap: 2rem; justify-content: center; }
+        .why-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(33,145,80,0.07); padding: 1.2rem 1rem; flex: 1; min-width: 180px; max-width: 260px; text-align: center; }
+        .why-card i { font-size: 2rem; margin-bottom: 0.5rem; color: #219150; }
+        .footer { background: #219150; color: #fff; padding: 1rem 0; margin-top: 2rem; }
+        .footer-text { margin: 0.2rem 0; font-size: 0.95rem; }
+        @media (max-width: 900px) {
+            .feature-cards, .why-cards { flex-direction: column; gap: 1rem; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header class="header">
-        <div class="container flex justify-between items-center">
-            <div class="logo">
-                <!-- Placeholder for logo image, replace with your actual logo path -->
-                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8">
+        <div class="container flex justify-between items-center" style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:auto;">
+            <div class="logo" style="display:flex;align-items:center;">
+                <img src="assets/images/logo.png" alt="AgriPredict Logo" class="h-8" style="height:40px;">
                 <span class="logo-text">AgriPredict</span>
                 <span class="tagline">Rice Yield & Soil Nutrient Predictor</span>
             </div>
             <nav class="nav-menu">
                 <ul class="flex">
-                    <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="predict.html" class="nav-link"><i class="fas fa-chart-line"></i> Predict</a></li>
                     <li><a href="help.html" class="nav-link"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li><a href="login_new.html" class="nav-link" id="loginNav"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="register_new.html" class="nav-link" id="registerNav"><i class="fas fa-user-plus"></i> Register</a></li>
+                    <li><a href="#" class="nav-link hidden" id="logoutNav"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profile.html" class="nav-link hidden" id="profileNav"><i class="fas fa-user"></i> Profile</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero-section text-center py-20">
-        <div class="container">
-            <h1 class="hero-title">Rice Yield & Soil Nutrient Predictor</h1>
-            <p class="hero-subtitle">Get expected predictions on expected rice yield and required NPK levels based on your farming data using advanced machine learning models.</p>
-            <a href="predict.html" class="btn btn-primary mt-8">Predict Now <i class="fas fa-arrow-right ml-2"></i></a>
+    <main class="main-content">
+        <div class="container text-center" style="max-width:900px;margin:auto;">
+            <h1 class="section-title">Rice Yield &amp; Soil Nutrient Predictor</h1>
+            <p class="section-subtitle">Get instant predictions on expected rice yield and required NPK levels based on your farming data using advanced machine learning models.</p>
+            <a href="predict.html" class="btn btn-primary">Predict Now &rarr;</a>
         </div>
-    </section>
-
-    <!-- Advanced ML Pipeline Section -->
-    <section class="ml-pipeline-section py-16 bg-light-green">
-        <div class="container text-center">
-            <h2 class="section-title">Advanced ML Pipeline</h2>
-            <p class="section-subtitle">Our three-phase prediction system combines multiple machine learning models to provide accurate and reliable agricultural insights.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <!-- Phase 1 Card -->
-                <div class="card ml-card">
-                    <div class="icon-circle bg-green-light"><i class="fas fa-seedling icon-large"></i></div>
-                    <h3 class="card-title">Phase 1: Rice Yield</h3>
-                    <p class="card-description">Basic yield prediction predicts the year based on district, crop year, and production data.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> District-specific factors</li>
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Historical data analysis</li>
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Year-over-year trends</li>
+        <div class="container" style="max-width:1100px;margin:auto;">
+            <h2 class="section-title" style="font-size:1.3rem;margin-top:3rem;margin-bottom:1rem;">Advanced ML Pipeline</h2>
+            <p style="text-align:center;color:#444;margin-bottom:2rem;">Our three-phase prediction system combines multiple machine learning models to provide accurate and reliable agricultural insights.</p>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3><i class="fas fa-seedling"></i> Phase 1: Rice Yield</h3>
+                    <ul>
+                        <li>Multilinear regression model predicts rice yield based on district, crop year, and production data.</li>
+                        <li>District-specific factors</li>
+                        <li>Historical production analysis</li>
+                        <li>Year-over-year trends</li>
                     </ul>
                 </div>
-                <!-- Phase 2 Card -->
-                <div class="card ml-card">
-                    <div class="icon-circle bg-green-light"><i class="fas fa-flask icon-large"></i></div>
-                    <h3 class="card-title">Phase 2: Soil Nutrients</h3>
-                    <p class="card-description">Soil nutrient prediction using optimal NPK levels based on climate conditions.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Rainfall impact analysis</li>
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Temperature considerations</li>
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Humidity correlation</li>
+                <div class="feature-card">
+                    <h3><i class="fas fa-flask"></i> Phase 2: Soil Nutrients</h3>
+                    <ul>
+                        <li>Support Vector Regression predicts optimal NPK levels based on climate conditions.</li>
+                        <li>Rainfall impact analysis</li>
+                        <li>Temperature optimization</li>
+                        <li>Humidity correlation</li>
                     </ul>
                 </div>
-                <!-- Phase 3 Card -->
-                <div class="card ml-card">
-                    <div class="icon-circle bg-green-light"><i class="fas fa-chart-pie icon-large"></i></div>
-                    <h3 class="card-title">Phase 3: Final Prediction</h3>
-                    <p class="card-description">Yield prediction considering all factors for the most accurate final yield prediction.</p>
-                    <ul class="card-list">
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Multi-model ensemble</li>
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Comprehensive analysis</li>
-                        <li><i class="fas fa-check-circle text-green-600 mr-2"></i> Optimized accuracy</li>
+                <div class="feature-card">
+                    <h3><i class="fas fa-layer-group"></i> Phase 3: Final Prediction</h3>
+                    <ul>
+                        <li>Hybrid stacked model combines all factors for the most accurate final yield prediction.</li>
+                        <li>Multi-model ensemble</li>
+                        <li>Comprehensive analysis</li>
+                        <li>Optimized accuracy</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Why Choose AgriPredict Section -->
-    <section class="why-choose-section py-16">
-        <div class="container text-center">
-            <h2 class="section-title">Why Choose AgriPredict?</h2>
-            <p class="section-subtitle">Empowering farmers with data-driven insights for better crop management and higher yields.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <!-- Farmer-Friendly Card -->
-                <div class="card feature-card">
-                    <div class="icon-circle bg-green-light"><i class="fas fa-tractor icon-large"></i></div>
-                    <h3 class="card-title">Farmer-Friendly</h3>
-                    <p class="card-description">Simple interface designed for farmers of all technical backgrounds.</p>
-                </div>
-                <!-- Accurate Predictions Card -->
-                <div class="card feature-card">
-                    <div class="icon-circle bg-green-light"><i class="fas fa-chart-bar icon-large"></i></div>
-                    <h3 class="card-title">Accurate Predictions</h3>
-                    <p class="card-description">Advanced ML models trained on comprehensive agricultural datasets.</p>
-                </div>
-                <!-- Regional Focus Card -->
-                <div class="card feature-card">
-                    <div class="icon-circle bg-green-light"><i class="fas fa-map-marker-alt icon-large"></i></div>
-                    <h3 class="card-title">Regional Focus</h3>
-                    <p class="card-description">Specialized for Karnataka districts with local climate considerations.</p>
+        <section class="why-section">
+            <div class="container" style="max-width:1100px;margin:auto;">
+                <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1rem;">Why Choose AgriPredict?</h2>
+                <p style="text-align:center;color:#444;margin-bottom:2rem;">Empowering farmers with data-driven insights for better crop management and higher yields.</p>
+                <div class="why-cards">
+                    <div class="why-card">
+                        <i class="fas fa-user-farmer"></i>
+                        <h4>Farmer-Friendly</h4>
+                        <p>Simple interface designed for farmers of all technical backgrounds</p>
+                    </div>
+                    <div class="why-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Accurate Predictions</h4>
+                        <p>Advanced ML models trained on comprehensive agricultural datasets</p>
+                    </div>
+                    <div class="why-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Regional Focus</h4>
+                        <p>Specialized for Karnataka districts with local climate considerations</p>
+                    </div>
                 </div>
             </div>
+        </section>
+        <div class="container text-center" style="max-width:900px;margin:auto;">
+            <div style="background:#219150;color:#fff;padding:2rem 1rem;border-radius:16px;margin:2rem 0;">
+                <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Ready to Optimize Your Rice Yield?</h2>
+                <p style="font-size:1.1rem;margin-bottom:1.2rem;">Start making data-driven decisions for your farm today.</p>
+                <a href="predict.html" class="btn btn-primary" style="background:#fff;color:#219150;">Get Started &rarr;</a>
+            </div>
         </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="cta-section text-center py-16 bg-green-700 text-white">
-        <div class="container">
-            <h2 class="cta-title">Ready to Optimize Your Rice Yield?</h2>
-            <p class="cta-subtitle">Start making data-driven decisions for your farm today.</p>
-            <a href="predict.html" class="btn btn-secondary mt-8">Get Started <i class="fas fa-arrow-right ml-2"></i></a>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
+    </main>
     <footer class="footer">
         <div class="container text-center">
             <p class="footer-text">Powered by Advanced Machine Learning</p>
             <p class="footer-text">AgriPredict &copy; 2024 - Transforming Agriculture through Data Science</p>
         </div>
     </footer>
-
-    <!-- Link to custom JavaScript -->
-    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof checkLoginStatus === 'function') {
+          checkLoginStatus();
+        }
+      });
+    </script>
 </body>
 </html>
