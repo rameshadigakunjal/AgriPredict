@@ -40,7 +40,7 @@ def predict():
         user_id = session.get('user_id')
         if user_id:
             import sqlite3
-            conn = sqlite3.connect('anaconda_projects/db/project_filebrowser.db')
+            conn = sqlite3.connect('app_database.db')
             cur = conn.cursor()
             cur.execute('''INSERT INTO predictions (user_id, district, year, area, production, temperature, rainfall, humidity, predicted_yield, predicted_n, predicted_p, predicted_k)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',

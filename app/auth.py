@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 import os
 
-DATABASE = 'anaconda_projects/db/project_filebrowser.db'
+DATABASE = 'app_database.db'
 
 # Add prediction table
 def init_db():

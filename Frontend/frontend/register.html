@@ -84,27 +84,5 @@
     <script src="js/main.js"></script>
     <!-- Link to auth.js for registration specific functionalities -->
     <script src="js/auth.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle registration
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const username = document.getElementById('fullName').value;
-            const password = document.getElementById('password').value;
-            const res = await fetch('/register', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, password})
-            });
-            const data = await res.json();
-            if (res.ok) {
-                alert('Registration successful!');
-                window.location.href = 'login.html';
-            } else {
-                alert(data.message || 'Registration failed.');
-            }
-        });
-    });
-    </script>
 </body>
 </html>
